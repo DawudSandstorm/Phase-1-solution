@@ -3,6 +3,7 @@ const bodyParser=require('body-parser');
 const app = express();
 const port = 3000;
 var fs = require("fs");
+const { clear } = require('console');
 
 app.listen(port);
 console.log('Server started at port:' + port);
@@ -41,6 +42,23 @@ app.get('/wfile', function(req, res) {
 });
 
 
+// Show the form
+app.get('/form', function(req, res) {
+  res.setHeader('Content-Type', 'text/html');
+  fs.readFile('./post.html', 'utf8', (err, contents) => {
+    if(err) {
+        console.log('Form file Read Error', err);
+        res.write("<p>Form file Read Error");
+    } else {
+        console.log('Form loaded\n');
+        res.write(contents + "<br>");
+    }
+    res.end();
+  });
+});
+
+
+
 
 // List all tickets (which are stored in a file)
 app.get('/rest/list', function(req, res) {
@@ -71,5 +89,5 @@ app.post('/rest/maketicket', function(req, res) {
     }
   // Report to the user
   res.send(inp_string + " <p>stored to file");
+  });
 });
-
