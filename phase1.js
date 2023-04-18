@@ -75,6 +75,21 @@ app.get('/rest/list', function(req, res) {
   });
 });
 
+// Search for a specific ticket (id)
+app.get('/rest/ticket/:id', function(req, res) {
+  var regexString = new RegExp('{\"id\":' + req.params.id +',.*');
+  console.log("Request for ID: " + req.params.id);
+  console.log("RegExp: " + regexString + "\n");
+
+  var allrecords = fs.readFile("./mydata.txt", 'utf8', function(err, doc) {
+    var result = doc.match(/regexString/s);
+    console.log("Result: " + result + "Done\n");
+    res.send(result);
+  });
+});
+
+
+
 // A POST request
 app.post('/rest/maketicket', function(req, res) {
   const body = req.body;
