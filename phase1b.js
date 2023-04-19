@@ -11,7 +11,9 @@ console.log('Server started at port:' + port);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// routes will go here
+// ---------------------
+// Routes for the app
+// ---------------------
 
 app.get('/', function(req, res) {
   const myquery = req.query;
@@ -20,7 +22,7 @@ app.get('/', function(req, res) {
 });
 
 
-// Show the form
+// Show the form for POSTing input
 app.get('/form', function(req, res) {
   res.setHeader('Content-Type', 'text/html');
   fs.readFile('./post.html', 'utf8', (err, contents) => {
@@ -36,31 +38,31 @@ app.get('/form', function(req, res) {
 });
 
 
-
-
 // List all tickets (which are stored in a file)
 app.get('/rest/list', function(req, res) {
   res.setHeader('Content-Type', 'text/html');
-  fs.readFile('./mydata.txt', 'utf8', (err, jsonString) => {
+  fs.readFile('./mydata.txt', 'utf8', (err, data) => {
     if(err) {
         console.log('File Read Error', err);
         res.write("<p>File Read Error");
     } else {
         console.log('Tickets loaded\n');
-        res.write(JSON.stringify(jsonString) + "<br>");
+        res.write(data.replace('\n','<br>') + "<br>Listing completed");
     }
     res.end();
   });
 });
 
 // Search for a specific ticket (id)
+// The file assumed to contain records as strings, one record per line.
+// Here we use a regular expression match to find the record of interest.
 app.get('/rest/ticket/:id', function(req, res) {
-  var regexString = new RegExp('{\"id\":' + req.params.id +',.*');
+  const regexString = new RegExp('id":"' + req.params.id + '.*');
   console.log("Request for ID: " + req.params.id);
   console.log("RegExp: " + regexString + "\n");
 
   var allrecords = fs.readFile("./mydata.txt", 'utf8', function(err, doc) {
-    var result = doc.match(/regexString/s);
+    var result = doc.match(regexString);
     console.log("Result: " + result + "Done\n");
     res.send(result);
   });
@@ -68,7 +70,7 @@ app.get('/rest/ticket/:id', function(req, res) {
 
 
 
-// A POST request
+// A POST request to insert a record by appending it as a string in a new line
 app.post('/rest/maketicket', function(req, res) {
   const body = req.body;
   // Report to console what was received (for debugging)
