@@ -20,28 +20,6 @@ app.get('/', function(req, res) {
 });
 
 
-// Write to a file 
-
-app.get('/wfile', function(req, res) {
-  const myquery = req.query;
-  
-  var outstring = '';
-  for(var key in myquery) { outstring += "--" + key + ">" + myquery[key]; }
-  fs.appendFile("mydata.txt", outstring+'\n', (err) => {
-    if (err)
-      console.log(err);
-    else {
-      console.log("File written successfully\n");
-      console.log("Contents of file now:\n");
-      console.log(fs.readFileSync("mydata.txt", "utf8"));
-    }
-  });
- 
-  res.send(outstring);
-
-});
-
-
 // Show the form
 app.get('/form', function(req, res) {
   res.setHeader('Content-Type', 'text/html');
