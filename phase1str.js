@@ -1,3 +1,4 @@
+// In this version data are handled as STRINGS and string operations are used.
 const express = require('express');
 const bodyParser=require('body-parser');
 const app = express();
