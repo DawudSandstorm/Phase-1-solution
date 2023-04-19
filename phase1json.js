@@ -1,3 +1,4 @@
+// In this version data are handled as JSONs and JSON operations are used.
 const express = require('express');
 const bodyParser=require('body-parser');
 const app = express();
@@ -11,7 +12,9 @@ console.log('Server started at port:' + port);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// routes will go here
+// ---------------------
+// Routes for the app
+// ---------------------
 
 app.get('/', function(req, res) {
   const myquery = req.query;
@@ -21,7 +24,7 @@ app.get('/', function(req, res) {
 
 
 
-// Show the form
+// Show the form for POSTing input
 app.get('/form', function(req, res) {
   res.setHeader('Content-Type', 'text/html');
   fs.readFile('./post.html', 'utf8', (err, contents) => {
@@ -91,8 +94,7 @@ app.get('/rest/ticket/:id', function(req, res) {
 });
 
 
-
-// A POST request
+// A POST request to insert a new record in a local file
 app.post('/rest/maketicket', function(req, res) {
   // const newTicket = req.body;
   // Report to console what was received (for debugging)
