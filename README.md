@@ -12,9 +12,9 @@ Things to note:
   
 <li>In this repository there is a form "post.html" which posts data to the routes of the code files for creating new records. What that form does can also be done with Postman (without importing anything from Github). </li>
 
-<li>The file "mydata.txt" is just a file that contains some initial records and stores new ones. It is the one that phase1str.js is using for local storage. </li>
+<li>The file "mydata_str.txt" is just a file that contains some initial records and stores new ones. It is the one that phase1str.js is using for local storage. </li>
   
-<li>The file "tickets.txt" is just a file that contains some initial records and stores new ones. It is the one that phase1json.js is using for local storage. </li>
+<li>The file "mydata.txt" is just a file that contains some initial records and stores new ones. It is the one that phase1json.js is using for local storage. </li>
   
 <li>The "package.json" acts as a sort of "registry" that records build parameters and dependencies required for building and deploying the app.</li>
 </ol>
