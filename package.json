@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "CKs Express Test on Render",
   "main": "phase1str.js",
-  "repository": " DawudSandstorm/Phase-1-solution
-",
+  "repository": "https://github.com/DawudSandstorm/Phase-1-solution",
   "author": "CK",
   "license": "MIT",
   "private": false,
